@@ -102,7 +102,7 @@ set nospell
 " turn on syntax highlighting
 syntax on
 " my colorcheme forever!!!!!!
-colorscheme tir_black
+colorscheme evening
 
 " gui and terminal compatible color scheme
 if has("gui_running")

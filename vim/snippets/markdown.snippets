@@ -1,9 +1,9 @@
 # [link][]
-snippet []
+snippet [][
 	[${1:link_id}][]${2}
 # [link][id]
-snippet [[
-	[${1:link}][${2:id}]${3}
+snippet linkv
+	[${1:isim}][${2:id}]${3}
 # [link](url)
 snippet [(
 	[${1:link}](http://${2:url})${3}
@@ -14,16 +14,16 @@ snippet [@
 snippet [("
 	[${1:link}](${2:url} "${3:title}")${4}
 # [id]: url "title"
-snippet [:
+snippet linka
 	[${1:id}]: http://${2:url} "${3:title}"
 # [id]: email "title"
-snippet [:@
+snippet mail
 	[${1:id}]: mailto:${2:url} "${3:title}"
 # ![alt][id]
-snippet ![
+snippet resimver
 	![${1:alt}][${2:id}]${3}
 # ![alt](url)
-snippet !(
+snippet resim
 	![${1:alt}](${2:url})${3}
 # ![alt](url "title")
 snippet !("

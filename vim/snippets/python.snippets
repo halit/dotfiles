@@ -1,7 +1,7 @@
 snippet usrbin
 	#!/usr/bin/python
 
-snippet imp
+snippet import
 	import ${1:module}
 # Module Docstring
 snippet docs
@@ -10,14 +10,14 @@ snippet docs
 	Author: ${2:`g:snips_author`}
 	Description: ${3}
 	'''
-snippet wh
+snippet while
 	while ${1:condition}:
 		${2:# code...}
 snippet for
 	for ${1:needle} in ${2:haystack}:
 		${3:# code...}
 # New Class
-snippet cl
+snippet class
 	class ${1:ClassName}(${2:object}):
 		"""${3:docstring for $1}"""
 		def __init__(self, ${4:arg}):
@@ -45,7 +45,7 @@ snippet property
 		def fset(self, value):
 			${4:self._$1 = value}
 # Lambda
-snippet ld
+snippet lambda
 	${1:var} = lambda ${2:vars} : ${3:action}
 snippet .
 	self.

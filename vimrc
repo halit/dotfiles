@@ -26,8 +26,8 @@
 "    <F2>            -- Toggle smart indent on paste
 "    CTRL-=          -- Make the current window taller
 "    CTRL-- (CTRL-DASH) -- Make the current window shorter
-"    <leader>p       -- Run PEP8 on current Python file
-"    <leader>pp      -- Run PEP8 on current Python file (with detailed --show-pep)
+"    <leader>R       -- Run PEP8 on current Python file
+"    <leader>e88      -- Run PEP8 on current Python file (with detailed --show-pep)
 "
 " I have set up some custom commands that might be of interest
 "

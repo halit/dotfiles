@@ -45,7 +45,7 @@
 " set the mapleader key
 let mapleader = ","
 let g:mapleader = ","
-
+let g:Powerline_symbols = 'fancy'
 " tell the bell to go beep itself!
 set visualbell
 
@@ -102,7 +102,7 @@ set nospell
 " turn on syntax highlighting
 syntax on
 " my colorcheme forever!!!!!!
-colorscheme evening
+colorscheme darktango
 
 " gui and terminal compatible color scheme
 if has("gui_running")
@@ -408,4 +408,5 @@ if has("gui_running")
 endif
 
 " added path to ctags plugin
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let Tlist_Ctags_Cmd='ctags'
+autocmd VimEnter * NERDTree

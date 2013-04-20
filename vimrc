@@ -23,7 +23,7 @@
 "    <Enter>         -- open a new line (non-insert)
 "    <S-Enter>       -- open a new line above (non-insert)
 "    <leader>s       -- Toggle spell checking
-"    <F2>            -- Toggle smart indent on paste
+"    <leader><F3     -- Toggle smart indent on paste
 "    CTRL-=          -- Make the current window taller
 "    CTRL-- (CTRL-DASH) -- Make the current window shorter
 "    <leader>R       -- Run PEP8 on current Python file
@@ -48,6 +48,17 @@ let g:mapleader = ","
 let g:Powerline_symbols = 'fancy'
 " tell the bell to go beep itself!
 set visualbell
+let g:pymode_doc_key = 'd'
+
+map <leader>td <Plug>TaskList
+map <leader>g :GundoToggle<CR>
+let g:ctrlp_map = '<c-f>'
+let g:ctrlp_cmd = 'CtrlP'
+
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
 
 " -----------------------------------------------------------------
 " Searching
@@ -63,6 +74,8 @@ set smartcase
 " a toggle for search highlight
 map <silent> <leader>h :set hlsearch!<CR>
 
+" close windows
+map <silent> <leader>q :q!<CR>
 " make sure the above file gets the proper filetype
 au BufRead .vim_commonrc set ft=vim
 
@@ -88,6 +101,11 @@ set wildignore+=*.pyc,*.pyo,CVS,.svn,.git,*.mo,.DS_Store,*.pt.cache,*.Python,*.o
 " set up jj as mode switch
 map! jj <ESC>
 
+" set up my tabs
+map <silent>gn :tabnew<CR>
+map <silent>gc :tabclose<CR>
+map <silent>gs :tabs<CR>
+
 " hide the backup and swap files
 set backupdir=~/.backup/vim,.,/tmp
 set directory=~/.backup/vim/swap,.,/tmp
@@ -95,23 +113,24 @@ set backupskip=/tmp/*,/private/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
 
 map <silent> <leader>s :set spell!<CR>
 set nospell
+execute pathogen#infect()
 
-" -----------------------------------------------------------------
-" Colors and Syntax
+"  ----------------------------------------------------------------
+"" -Colors and Syntax
 " -----------------------------------------------------------------
 " turn on syntax highlighting
 syntax on
 " my colorcheme forever!!!!!!
-colorscheme darktango
+colorscheme molokai
+set t_Co=256
+"set background=dark
 
 " gui and terminal compatible color scheme
 if has("gui_running")
   set t_Co=256
   set background=dark
   " a 256 color enhanced version of ir_black
-  colorscheme tir_black
-  " my mods to the theme
-  colorscheme tir_black
+  colorscheme molokai
 endif
 
 " A function to toggle between light and dark colors
@@ -119,11 +138,12 @@ function! ColorSwitch()
     " check for the theme, and switch to the other one.
     " I had this working with &background == 'dark/light' but something
     " stopped working for me :()
-    if g:colors_name == 'tir_black'
-        colorscheme tir_black
+    if g:colors_name == 'molokai'
+        colorscheme simplewhite
         "colorscheme tir_black
     elseif g:colors_name == 'simplewhite'
-        colorscheme tir_black
+        colorscheme molokai
+        set background=dark
         "colorscheme tir_black
         return
     endif
@@ -148,7 +168,7 @@ set autoindent
 set smartindent
 
 " turn off smart indentation when pasting
-set pastetoggle=<F2>
+set pastetoggle=<leader><F3>
 " shortcut for pasting clipboard contents
 map <silent> <leader>* "+gP
 
@@ -290,6 +310,7 @@ map <leader>a :Ack<Space>
 " buffer explorer ctrl + tabbing and single click
 let g:miniBufExplUseSingleClick = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
+set completeopt=menuone,longest,preview
 
 " automatically use the wiki text for trac.sixfeetup.com when
 " using it's all text
@@ -324,7 +345,7 @@ au BufNewFile,BufRead *.js.dtml set filetype=javascript
 au BufNewFile,BufRead /*/tests/*.txt set filetype=doctest
 
 " fuzzy finder text mate mapping
-map <silent> <leader>t :FuzzyFinderTextMate<CR>
+"map <silent> <leader>t :FuzzyFinderTextMate<CR>
 
 " Make cursor move by visual lines instead of file lines (when wrapping)
 " This makes me feel more at home :)
@@ -358,7 +379,7 @@ map ; :
 " -----------------------------------------------------------------
 set listchars=eol:¬,tab:»\ 
 " show invisible characters by default
-set list
+" set list
 " toggle invisible characters
 noremap <silent> <leader>i :set list!<CR>
 
@@ -409,4 +430,7 @@ endif
 
 " added path to ctags plugin
 let Tlist_Ctags_Cmd='ctags'
-autocmd VimEnter * NERDTree
+" autocmd VimEnter * NERDTree
+autocmd VimEnter * exe 'NERDTreeToggle' | wincmd l
+autocmd VimEnter,BufNewFile,BufRead /*/itsalltext/* exe 'NERDTreeClose'
+autocmd VimEnter,BufNewFile,BufRead /*/itsalltext/* set nospell

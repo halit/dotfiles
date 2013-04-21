@@ -3,7 +3,7 @@
 " The mapleader has been switched from '\' to ',' anytime you see
 " <leader> that is what this refers to.
 "
-"    <leader>t       -- opens the TextMate fuzzy finder
+"    <leader>t       -- opens the TextMate fuzzy finder"
 "    tt              -- opens up the taglist
 "    <leader>h       -- toggles the highlight search
 "    <leader>n       -- toggles the line numbers
@@ -48,10 +48,32 @@ let g:mapleader = ","
 let g:Powerline_symbols = 'fancy'
 " tell the bell to go beep itself!
 set visualbell
+
+map <C-c> "+y
+map <C-w>d :bd<CR>
+
+map <leader>bd :Bclose<cr>
+map <leader>ba :1,300 bd!<cr>
+
+" Moving tab using CTRL+ the arrows
+map <C-right> :bn<CR>
+map <C-left> :bp<CR>
+
+" Tab configuration
+map <leader>tn :tabnew! %<cr>
+map <leader>te :tabedit 
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+
+" When pressing <leader>cd switch to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>"
+
+set t_Co=256
 let g:pymode_doc_key = 'd'
 
 map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
+
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
 

@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/halit/tmux-powerline-master'
 let g:netrw_dirhist_2='/home/halit/dotfiles/vim/plugin'
 let g:netrw_dirhist_3='/home/halit/cCodes'
+let g:netrw_dirhist_4='/home/halit/cCodes/euler'
+let g:netrw_dirhist_5='/home/halit/cprojects/hmem/.git'

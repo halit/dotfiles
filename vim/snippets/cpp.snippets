@@ -28,3 +28,21 @@ snippet cl
 	private:
 		${3:/* data */}
 	};
+
+# main()
+snippet main
+	int main()
+	{
+		${1}
+		return 0;
+	}
+# #include <...>
+snippet inc
+	#include <${1:iostream}>${2}
+snippet ci
+	cin >> ${1};${2}
+snippet co
+	cout << ${1} << endl;${2}
+snippet us
+	using namespace ${1:std};${2}
+

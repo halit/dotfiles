@@ -7,7 +7,7 @@ SetMacro( 'COPYRIGHT',   'Copyright (c) |YEAR|, |AUTHOR|' )
 SetMacro( 'EMAIL',       'info@halitalptekin.com' )
 SetMacro( 'LICENSE',     'GNU General Public License' )
 
-SetStyle( 'C' )
+SetStyle( 'CPP' )
 
 § ==========================================================
 §  File Includes and Shortcuts

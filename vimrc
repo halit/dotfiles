@@ -42,13 +42,46 @@
 "
 " -----------------------------------------------------------------
 
+" configure tags - add additional tags here or comment out not-used ones      
+set tags+=~/.vim/tags/stl      
+set tags+=~/.vim/tags/gl      
+set tags+=~/.vim/tags/qt4      
+
+" Lisp
+let g:vimclojure#HighlightBuiltins = 1
+let g:vimclojure#ParenRainbow = 1
+let g:lisp_rainbow=1
+
+map <leader>re :call SlimvEvalBuffer()<cr>
+map <leader>rc :call SlimvClearReplBuffer()<cr>
+map <leader>rs :call SlimvConnectServer()<cr>
+
+" build tags of your own project with CTRL+F12      
+"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>      
+noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>      
+inoremap <F12> <Esc>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr>      
+
+" OmniCppComplete      
+let OmniCpp_NamespaceSearch = 1      
+let OmniCpp_GlobalScopeSearch = 1      
+let OmniCpp_ShowAccess = 1      
+let OmniCpp_MayCompleteDot = 1      
+let OmniCpp_MayCompleteArrow = 1      
+let OmniCpp_MayCompleteScope = 1      
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]      
+
+" automatically open and close the popup menu / preview window      
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif      
+set completeopt=menuone,menu,longest,preview
+
 " set the mapleader key
 let mapleader = ","
 let g:mapleader = ","
 let g:Powerline_symbols = 'fancy'
+execute pathogen#infect()
+
 " tell the bell to go beep itself!
 set visualbell
-
 map <C-c> "+y
 map <C-w>d :bd<CR>
 
@@ -73,6 +106,7 @@ let g:pymode_doc_key = 'd'
 
 map <leader>td <Plug>TaskList
 map <leader>g :GundoToggle<CR>
+
 
 let g:ctrlp_map = '<c-f>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -135,7 +169,6 @@ set backupskip=/tmp/*,/private/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
 
 map <silent> <leader>s :set spell!<CR>
 set nospell
-execute pathogen#infect()
 
 "  ----------------------------------------------------------------
 "" -Colors and Syntax
@@ -420,8 +453,8 @@ nnoremap tt :TlistToggle<CR>
 if has("gui_running")
 
     " Default size of window
-    set columns=175
-    set lines=40
+    set columns=180
+    set lines=50
     
     " automagically open NERDTree in a GUI
     autocmd VimEnter * exe 'NERDTreeToggle' | wincmd l
@@ -437,11 +470,12 @@ if has("gui_running")
     if has("gui_macvim")
         " use the whole screen
         "set fuoptions=maxvert,maxhorz
+        set guifont=Droid\ Sans\ Mono:h12
+
 
         " use Monaco with no antialiasing
         "set guifont=Monaco:h10
-        set guifont=Droid\ Sans\ Mono:h12
-        "set guifont=Menlo\ Regular:h12
+                "set guifont=Menlo\ Regular:h12
 
         "set noantialias
         " maybe set the transparency

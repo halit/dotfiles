@@ -1,0 +1,11 @@
+;;; -*- coding: utf-8 -*-
+(("/home/halit/.emacs.d/elpa/cl-lib-0.3/cl-lib-autoloads.el" . 173)
+ ("/home/halit/.emacs.d/elpa/clojure-mode-2.1.0/clojure-mode-autoloads.el" . 1087)
+ ("/home/halit/.emacs.d/elpa/clojure-test-mode-2.1.0/clojure-test-mode-autoloads.el" . 829)
+ ("/home/halit/.emacs.d/elpa/elisp-slime-nav-0.6/elisp-slime-nav-autoloads.el" . 1319)
+ ("/home/halit/.emacs.d/elpa/nrepl-0.1.7/nrepl-autoloads.el" . 1442)
+ ("/home/halit/.emacs.d/elpa/starter-kit-bindings-2.0.2/starter-kit-bindings-autoloads.el" . 2120)
+ ("/home/halit/.emacs.d/elpa/starter-kit-eshell-2.0.3/starter-kit-eshell-autoloads.el" . 1816)
+ ("/home/halit/.emacs.d/elpa/starter-kit-lisp-2.0.3/starter-kit-lisp-autoloads.el" . 1916)
+ ("/home/halit/31-61.clj" . 95)
+ ("/home/halit/Masaüstü/test.clj" . 200))

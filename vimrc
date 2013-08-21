@@ -51,10 +51,8 @@ set tags+=~/.vim/tags/qt4
 let g:vimclojure#HighlightBuiltins = 1
 let g:vimclojure#ParenRainbow = 1
 let g:lisp_rainbow=1
-
-map <leader>re :call SlimvEvalBuffer()<cr>
-map <leader>rc :call SlimvClearReplBuffer()<cr>
-map <leader>rs :call SlimvConnectServer()<cr>
+let g:slimv_swank_clojure = '! xterm -e "cd ~/lispCodes/hello/ && lein swank"& ' 
+let g:paredit_electric_return=0
 
 " build tags of your own project with CTRL+F12      
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>      
@@ -79,6 +77,7 @@ let mapleader = ","
 let g:mapleader = ","
 let g:Powerline_symbols = 'fancy'
 execute pathogen#infect()
+let g:EasyMotion_leader_key = '<Leader>'
 
 " tell the bell to go beep itself!
 set visualbell

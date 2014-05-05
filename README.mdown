@@ -15,6 +15,7 @@ How I'm Using
   * `$ ln -s ~/dotfiles/.vim ~/.vim`
   * `$ ln -s ~/dotfiles/.zshrc ~/.zshrc`
   * `$ ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf`
+  * `git config --global core.excludesfile ~/dotfiles/.gitignore`
 
 3. Vim shortcuts
   * <Leader> key is ","

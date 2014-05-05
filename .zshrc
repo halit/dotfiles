@@ -18,7 +18,11 @@ alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory 
 alias svim="sudo vim" 
 alias servethis="python -c 'import SimpleHTTPServer; SimpleHTTPServer.test()'"
 alias pycclean='find . -name "*.pyc" -exec rm {} \;'
-
+alias cdp='cd ~/Projects'
+alias cdt='cd ~/temp'
+alias cdc='cd ~/Projects/cCodes'
+alias cdcpp='cd ~/Projects/cppCodes'
+alias ipy='ipython2 qtconsole --pylab&'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"

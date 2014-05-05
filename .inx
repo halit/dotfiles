@@ -1,0 +1,27 @@
+# Statusbar if tmux runs in X
+#
+set -g status-attr bright
+set -g status-right-length 50
+set -g status-left-length 50
+
+# default window title colors
+set-window-option -g window-status-fg black
+set-window-option -g window-status-bg default
+set-window-option -g window-status-attr bright
+
+# active window title colours
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr dim
+
+# command/message line colors
+set -g message-fg white
+set -g message-bg black
+set -g message-attr bright
+
+set -g status-attr bright
+set -g status-right-length 40
+set -g status-left-length 50
+
+set -g status-left "#[fg=blue]#H #[fg=black,bright]• #[fg=green]#(uname -r) #[fg=black,bright]• #[fg=yellow]#(awk \'{print $1/1000}\' /sys/class/thermal/thermal_zone0/temp)°C #[fg=default]"
+set -g status-right "#[fg=cyan]#(uptime | cut -d \" \" -f4-5 | cut -d\",\" -f1) #[fg=black,bright]• #[fg=magenta]#(cut -d \" \" -f1-3 /proc/loadavg)" 

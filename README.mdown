@@ -7,46 +7,10 @@ How I'm Using
 -------------
 
 1. Clone repository
+  * `cd ~`
   * `$ git clone git@github.com:halitalptekin/dotfiles.git`
 
 2. Create symlinks
-  * `$ ln -s ~/dotfiles/vimrc ~/.vimrc`
-  * `$ ln -s ~/dotfiles/vim ~/.vim`
-
-How to use
-----------
-This section is only just beginning, starting to add helpful info as I add new things.
-
-* See top of .vimrc for a list of common shortcuts.
-
-* Navigation: I prefer using :b and :e to navigate buffers and files. `,x` brings up NERDTree which is nice too.
-
-* Insert python debug line snippet: `pdb<tab>`
-
-* Python (via python_fn.vim)
-  * `[[`: Go to the beginning of block
-  * `]]`: Go to the end of block
-  * `]v`: Select the current block
-  * `]<`: Shift the block to left
-  * `]>`: Shift the block to right
-  * **`]#`: Comment the selection**
-  * **`]u`: Uncomment the selection**
-  * `]c`: Select the current/previous class
-  * `]f`: Select the current/previous function
-  * `]`: Jump to the previous line with the same/lower indentation
-  * `]`: Jump to the next line with the same/lower indentation
-
-* Fast code navigation via Exuberant ctags (need to install ctags.sourceforce.net)
-  * Rebuild ctags for a project in root of project directory (not in Vim): > `ctags -R *`
-  * `ctrl-]` to follow a tag
-  * `ctrl-t` to go back
-  * `:tag ` to search by tag
-  * `:stag ` to search by tag, then open in new window
-
-* Searching with Ack, and navigating Quickfix List
-  * search with Ack `,a`
-  * To close/open QuickFix: `:cclose`  `:copen`
-  * When in another window, to open next file in list use `:cn` First item in new file `:cnf`
-  * To go to a specific line: `:cc 10`
-
-
+  * `$ ln -s ~/dotfiles/.vimrc ~/.vimrc`
+  * `$ ln -s ~/dotfiles/.vim ~/.vim`
+  * `$ ln -s ~/dotfiles/.zshrc ~/.zshrc`

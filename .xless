@@ -1,0 +1,24 @@
+# Statusbar if tmux run in console
+# information normally in dwm bar
+set -g status-attr bright
+set -g status-right-length 50
+set -g status-left-length 50
+
+# default window title colors
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg default
+set-window-option -g window-status-attr dim
+
+# active window title colours
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr bright
+
+# message colours
+set -g message-fg magenta
+set -g message-bg default
+set -g message-attr bright
+
+set -g status-left "#[fg=blue] #H #[fg=black]• #[fg=green]#(awk \'{print $1/1000}\' /sys/class/thermal/thermal_zone0/temp)°C#[fg=black] • #[fg=red]Power: #(cat /sys/class/power_supply/BAT1/capacity)% "
+set -g status-right "#[fg=yellow,nobright]Mail: #(Scripts/tmuxmail)#[fg=black,bright] • #[fg=magenta]#(awk \'{ print $1,$2,$3 }\' /proc/loadavg)#[fg=black] • #[fg=white]%I:%M #[default] "
+

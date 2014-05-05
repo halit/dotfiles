@@ -3,6 +3,8 @@ README
 
 My Vim configs and scripts
 
+[![MyPc](mypc.png)](http://github.com/halitalptekin/dotfiles)
+
 How I'm Using
 -------------
 

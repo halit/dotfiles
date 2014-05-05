@@ -15,3 +15,19 @@ How I'm Using
   * `$ ln -s ~/dotfiles/.vim ~/.vim`
   * `$ ln -s ~/dotfiles/.zshrc ~/.zshrc`
   * `$ ln -s ~/dotfiles/.tmux.conf ~/.tmux.conf`
+
+3. Vim shortcuts
+  * <Leader> key is ","
+  * Easy motion key is <Leader>f. `,fs`
+  * <C-c> : copy the content to clipboard
+  * <Leader>tn : new tab
+  * <Leader>te : edit tab
+  * <Leader>tc : close tab
+  * <Leader>tm : move tab
+  * <Leader>td : task list
+  * <Leader>ts : tabs
+  * <Leader>g  : gundo
+  * <c-f>      : ctrlp
+  * <Leader>t  : tabs
+  * tt         : tag list
+

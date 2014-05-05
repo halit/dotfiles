@@ -1,47 +1,3 @@
-" -----------------------------------------------------------------
-"
-" The mapleader has been switched from '\' to ',' anytime you see
-" <leader> that is what this refers to.
-"
-"    <leader>t       -- opens the TextMate fuzzy finder"
-"    tt              -- opens up the taglist
-"    <leader>h       -- toggles the highlight search
-"    <leader>n       -- toggles the line numbers
-"    <leader>a       -- starts an ack search in the CWD
-"    <leader>f       -- shows the current file in the NERDTree. This
-"                       is the TextMate equivalent of ctrl+cmd+r
-"    <leader>T       -- Run tidy xml on the current file
-"    <leader>i       -- toggles invisible characters
-"    <leader>x       -- toggles NERDTree drawer
-"    <leader>b       -- shortcut for getting to NERDTree bookmarks
-"    <leader><Enter> -- opens a line at the current column (this is
-"                       the reverse of J)
-"    <leader>c       -- Switch between light and dark colors
-"    jj              -- alternative to <ESC>
-"    ;               -- alternative to :
-"    ctrl + tab      -- cycle through buffers/tabs
-"    <Enter>         -- open a new line (non-insert)
-"    <S-Enter>       -- open a new line above (non-insert)
-"    <leader>s       -- Toggle spell checking
-"    <leader><F3     -- Toggle smart indent on paste
-"    CTRL-=          -- Make the current window taller
-"    CTRL-- (CTRL-DASH) -- Make the current window shorter
-"    <leader>R       -- Run PEP8 on current Python file
-"    <leader>e88      -- Run PEP8 on current Python file (with detailed --show-pep)
-"
-" I have set up some custom commands that might be of interest
-"
-"    MarkdownToHTML  -- Converts the current buffer into HTML and
-"                       places it in a scratch buffer.
-"    MarkdownToHTMLCopy -- Same as previous, but copies to clipboard
-"    Shell           -- Runs a shell command and places it in the
-"                       scratch buffer
-"    TidyXML         -- Runs tidy in XML mode on the current buffer
-"    TerminalHere    -- Opens the terminal to the directory of the
-"                       current buffer
-"
-" -----------------------------------------------------------------
-
 " configure tags - add additional tags here or comment out not-used ones      
 set tags+=~/.vim/tags/stl      
 set tags+=~/.vim/tags/gl      
@@ -76,7 +32,7 @@ let mapleader = ","
 let g:mapleader = ","
 let g:Powerline_symbols = 'fancy'
 execute pathogen#infect()
-let g:EasyMotion_leader_key = '<Leader>'
+let g:EasyMotion_leader_key = '<Leader>f'
 
 " tell the bell to go beep itself!
 set visualbell
@@ -95,6 +51,7 @@ map <leader>tn :tabnew! %<cr>
 map <leader>te :tabedit 
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
+map <leader>ts :tabs<cr>
 
 " When pressing <leader>cd switch to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>"

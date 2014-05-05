@@ -31,3 +31,23 @@ How I'm Using
   * <Leader>t  : tabs
   * tt         : tag list
 
+4. Tmux shortcuts
+  * prefix key: ctrl-a
+  * reload config : r
+  * vertical split: v
+  * horizontal split: h
+  * escape: copy-mode
+  * paste buffer: p
+  * begin selection: v
+  * copy selection: y
+  * copy tmux buffer to clipboard: c-y
+  * move x clipboard into tmux paste buffer: c-p
+  * kill panel: q
+  * new window: c
+  * next window: n
+  * find window: f
+  * htop: ~
+  * tmux man: T
+  * mut man: M
+  * vim man: V
+  * map page open: c-m

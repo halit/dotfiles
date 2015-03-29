@@ -6,7 +6,7 @@
     (__)   (__)  (__) (_) (_)(_____)(_)\_)   (_/\/\_)(_____)(____/(____)     ~
 
 
-                          Version: 0.7.8b
+                          Version: 0.8.1
 
 ==============================================================================
 CONTENTS                                                       *pymode-contents*
@@ -22,6 +22,7 @@ CONTENTS                                                       *pymode-contents*
         2.7 Run code................................................|pymode-run|
         2.8 Breakpoints.....................................|pymode-breakpoints|
     3. Code checking...............................................|pymode-lint|
+        3.1 Code checkers options..........................|pymode-lint-options|
     4. Rope support................................................|pymode-rope|
         4.1 Code completion..................................|pymode-completion|
         4.2 Find definition.................................|pymode-rope-findit|
@@ -73,7 +74,7 @@ Features:                                                      *pymode-features*
 This script provides the following options that can customizes the behavior of
 PythonMode. These options should be set in your |vimrc|.
 
-        Bellow shows the default values.
+        Below shows the default values.
 
 
 Turn on the whole plugin                                            *'g:pymode'*
@@ -89,13 +90,17 @@ Value is list of path's strings.
 >
     let g:pymode_paths = []
 
-Trim unused white spaces on save                    *'g:pymode_trim_whitespaces'*
+Trim unused white spaces on save                   *'g:pymode_trim_whitespaces'*
 >
     let g:pymode_trim_whitespaces = 1
 
 Setup default python options                                *'g:pymode_options'*
 >
     let g:pymode_options = 1
+
+Setup max line length                       *'g:pymode_options_max_line_length'*
+>
+    let g:pymode_options_max_line_length = 79
 
 If this option is set to 1, pymode will enable the following options for
 python buffers: >
@@ -109,6 +114,10 @@ python buffers: >
     setlocal textwidth=79
     setlocal commentstring=#%s
     setlocal define=^\s*\\(def\\\\|class\\)
+
+Enable colorcolumn display at max_line_length   *'g:pymode_options_colorcolumn'*
+>
+    let g:pymode_options_colorcolumn = 1
 
 Setup pymode |quickfix| window
 
@@ -141,7 +150,7 @@ Set value to `python3` if you are working with python3 projects. You could use
 Pymode supports PEP8-compatible python indent.
 Enable pymode indentation                                  *'g:pymode_indent'*
 >
-    let g:pymode_indent = []
+    let g:pymode_indent = 1
 
 ------------------------------------------------------------------------------
 2.3 Python folding ~
@@ -330,6 +339,40 @@ Definitions for |signs|
     let g:pymode_lint_info_symbol = 'II'
     let g:pymode_lint_pyflakes_symbol = 'FF'
 
+------------------------------------------------------------------------------
+3.1 Set code checkers options ~
+                                                           *pymode-lint-options*
+
+Pymode has the ability to set code checkers options from pymode variables:
+
+Set PEP8 options                                  *'g:pymode_lint_options_pep8'*
+>
+    let g:pymode_lint_options_pep8 =
+        \ {'max_line_length': g:pymode_options_max_line_length})
+
+See https://pep8.readthedocs.org/en/1.4.6/intro.html#configuration for more
+info.
+
+Set Pyflakes options                          *'g:pymode_lint_options_pyflakes'*
+>
+    let g:pymode_lint_options_pyflakes = { 'builtins': '_' }
+
+Set mccabe options                              *'g:pymode_lint_options_mccabe'*
+>
+    let g:pymode_lint_options_mccabe = { 'complexity': 12 }
+
+Set pep257 options                              *'g:pymode_lint_options_pep257'*
+>
+    let g:pymode_lint_options_pep257 = {}
+
+Set pylint options                              *'g:pymode_lint_options_pylint'*
+>
+    let g:pymode_lint_options_pylint =
+        \ {'max-line-length': g:pymode_options_max_line_length})
+
+See http://docs.pylint.org/features.html#options for more info.
+
+
 
 ==============================================================================
 3. Rope support ~
@@ -354,7 +397,7 @@ Turn on the rope script                                        *'g:pymode_rope'*
 .ropeproject Folder ~
                                                                   *.ropeproject*
 
-*:PymodeRopeNewProject* -- Open new Rope project in current working directory
+*:PymodeRopeNewProject* [<path>] -- Open new Rope project in the given path
 *:PymodeRopeRegenerate* -- Regenerate the project cache
 
 Rope uses a folder inside projects for holding project configuration and data.
@@ -371,8 +414,9 @@ Currently it is used for things such as:
 * It can be used to save information about object inferences.
 * It can be used to save a global name cache, which is used for auto-import.
 
-If `.ropeproject` is not found in the current directory, rope will look
-recursively for it in parent folders.
+By default, if `.ropeproject` is not found in the current directory, rope will
+look recursively for it in parent folders.
+
 Warning: If rope finds `.ropeproject` in a parent dir, it will use it with
 all its child directories, which may slow scanning down (because of many,
 possibly unrelated, files)
@@ -380,7 +424,24 @@ possibly unrelated, files)
 Enable searching for |.ropeproject| in parent directories
                                                   *'g:pymode_rope_lookup_project'*
 >
-    let g:pymode_rope_lookup_project = 1
+    let g:pymode_rope_lookup_project = 0
+
+You can also manually set the rope project directory. If not specified rope will
+use the current directory.
+                                                  *'g:pymode_rope_project_root'*
+>
+    let g:pymode_rope_project_root = ""
+
+
+The location of the `.ropeproject` folder may also be overridden if you wish to
+keep it outside of your project root. The rope library treats this folder as a
+project resource, so the path will always be relative to your project root (a
+leading '/' will be ignored). You may use `'..'` path segments to place the
+folder outside of your project root.
+                                                 *'g:pymode_rope_ropefolder'*
+>
+    let g:pymode_rope_ropefolder='.ropeproject'
+
 
 
 Show documentation for element under cursor ~
@@ -645,6 +706,10 @@ Solutions:
   current dir.
 - Set |'g:pymode_rope_lookup_project'| to 0 for prevent searching in parent
   dirs.
+
+You may also set |'g:pymode_rope_project_root'| to manually specify the project
+root path.
+
 
 
 Pylint check is very slow

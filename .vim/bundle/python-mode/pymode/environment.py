@@ -7,7 +7,7 @@ import json
 import time
 import os.path
 
-from .utils import PY2
+from ._compat import PY2
 
 
 class VimPymodeEnviroment(object):
@@ -17,6 +17,7 @@ class VimPymodeEnviroment(object):
     prefix = '[Pymode]'
 
     def __init__(self):
+        """ Init VIM environment. """
         self.current = vim.current
         self.options = dict(encoding=vim.eval('&enc'))
         self.options['debug'] = self.var('g:pymode_debug', True)
@@ -24,13 +25,11 @@ class VimPymodeEnviroment(object):
     @property
     def curdir(self):
         """ Return current working directory. """
-
         return self.var('getcwd()')
 
     @property
     def curbuf(self):
         """ Return current buffer. """
-
         return self.current.buffer
 
     @property
@@ -45,7 +44,6 @@ class VimPymodeEnviroment(object):
     @property
     def source(self):
         """ Return source of current buffer. """
-
         return "\n".join(self.lines)
 
     @property
@@ -60,14 +58,19 @@ class VimPymodeEnviroment(object):
 
         return [l.decode(self.options.get('encoding')) for l in self.curbuf]
 
-    def var(self, name, to_bool=False):
+    @staticmethod
+    def var(name, to_bool=False, silence=False):
         """ Get vim variable.
 
         :return vimobj:
 
         """
-
-        value = vim.eval(name)
+        try:
+            value = vim.eval(name)
+        except vim.error:
+            if silence:
+                return None
+            raise
 
         if to_bool:
             try:
@@ -76,13 +79,13 @@ class VimPymodeEnviroment(object):
                 value = value
         return value
 
-    def message(self, msg, history=False):
+    @staticmethod
+    def message(msg, history=False):
         """ Show message to user.
 
         :return: :None
 
         """
-
         if history:
             return vim.command('echom "%s"' % str(msg))
 
@@ -143,22 +146,21 @@ class VimPymodeEnviroment(object):
             self.error('Invalid option: %s' % input_str)
             return self.user_input_choices(msg, *options)
 
-    def error(self, msg):
+    @staticmethod
+    def error(msg):
         """ Show error to user. """
         vim.command('call pymode#error("%s")' % str(msg))
 
     def debug(self, msg, *args):
         """ Print debug information. """
-
         if self.options.get('debug'):
             print("%s %s [%s]" % (
                 int(time.time()), msg, ', '.join([str(a) for a in args])))
 
     def stop(self, value=None):
         """ Break Vim function. """
-
         cmd = 'return'
-        if not value is None:
+        if value is not None:
             cmd += ' ' + self.prepare_value(value)
         vim.command(cmd)
 
@@ -168,7 +170,6 @@ class VimPymodeEnviroment(object):
         :return func:
 
         """
-
         def _wrapper(*args, **kwargs):
             try:
                 return func(*args, **kwargs)
@@ -181,7 +182,6 @@ class VimPymodeEnviroment(object):
 
     def run(self, name, *args):
         """ Run vim function. """
-
         vim.command('call %s(%s)' % (name, ", ".join([
             self.prepare_value(a) for a in args
         ])))
@@ -198,7 +198,6 @@ class VimPymodeEnviroment(object):
         :return unicode string:
 
         """
-
         if dumps:
             value = json.dumps(value)
 
@@ -227,19 +226,21 @@ class VimPymodeEnviroment(object):
         env.debug('Get offset', base or None, row, col, offset)
         return source, offset
 
-    def goto_line(self, line):
+    @staticmethod
+    def goto_line(line):
         """ Go to line. """
-
         vim.command('normal %sggzz' % line)
 
     def goto_file(self, path, cmd='e', force=False):
         """ Function description. """
-
         if force or os.path.abspath(path) != self.curbuf.name:
             self.debug('read', path)
+            if ' ' in path and os.name == 'posix':
+                path = path.replace(' ', '\\ ')
             vim.command("%s %s" % (cmd, path))
 
-    def goto_buffer(self, bufnr):
+    @staticmethod
+    def goto_buffer(bufnr):
         """ Open buffer. """
         if str(bufnr) != '-1':
             vim.command('buffer %s' % bufnr)

@@ -1,18 +1,12 @@
 """ Code runnning support. """
-
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
-
 import sys
-
-from .environment import env
 from re import compile as re
 
+from ._compat import StringIO
+from .environment import env
 
-encoding = re(r'#[^\w]+coding:\s+utf.*$')
 
+encoding = re(r'#.*coding[:=]\s*([-\w.]+)')
 
 def run_code():
     """ Run python code in current buffer.
@@ -23,9 +17,12 @@ def run_code():
     errors, err = [], ''
     line1, line2 = env.var('a:line1'), env.var('a:line2')
     lines = __prepare_lines(line1, line2)
-    for ix in (0, 1):
-        if encoding.match(lines[ix]):
-            lines.pop(ix)
+    if encoding.match(lines[0]):
+        lines.pop(0)
+        if encoding.match(lines[0]):
+            lines.pop(0)
+    elif encoding.match(lines[1]):
+        lines.pop(1)
 
     context = dict(
         __name__='__main__',

@@ -2,7 +2,6 @@ if !g:pymode || !g:pymode_indent
     finish
 endif
 
-
 setlocal nolisp
 setlocal tabstop=4
 setlocal softtabstop=4

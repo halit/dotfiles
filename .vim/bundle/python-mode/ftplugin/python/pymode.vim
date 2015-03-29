@@ -2,6 +2,8 @@ if !g:pymode || pymode#default('b:pymode', 1)
     finish
 endif
 
+let b:pymode_modified = &modified
+
 " Init paths
 if !pymode#default('g:pymode_init', 1)
     call pymode#init(expand('<sfile>:p:h:h:h'), g:pymode_paths)
@@ -56,7 +58,10 @@ if g:pymode_options
         setlocal number
     endif
     setlocal nowrap
-    setlocal textwidth=79
+    exe "setlocal textwidth=" . g:pymode_options_max_line_length
+    if g:pymode_options_colorcolumn && exists('+colorcolumn')
+        setlocal colorcolumn=+1
+    endif
     setlocal commentstring=#%s
     setlocal define=^\s*\\(def\\\\|class\\)
 endif
@@ -177,7 +182,7 @@ if g:pymode_rope
         inoremap <silent> <buffer> . .<C-R>=pymode#rope#complete_on_dot()<CR>
     end
 
-    command! -buffer PymodeRopeNewProject call pymode#rope#new()
+    command! -buffer -nargs=? PymodeRopeNewProject call pymode#rope#new(<f-args>)
     command! -buffer PymodeRopeUndo call pymode#rope#undo()
     command! -buffer PymodeRopeRedo call pymode#rope#redo()
     command! -buffer PymodeRopeRenameModule call pymode#rope#rename_module()

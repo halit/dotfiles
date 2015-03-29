@@ -15,6 +15,10 @@ if exists('g:loaded_syntastic_python_pylama_checker')
 endif
 let g:loaded_syntastic_python_pylama_checker = 1
 
+if !exists('g:syntastic_python_pylama_sort')
+    let g:syntastic_python_pylama_sort = 1
+endif
+
 let s:save_cpo = &cpo
 set cpo&vim
 
@@ -23,18 +27,19 @@ function! SyntaxCheckers_python_pylama_GetHighlightRegex(item)
 endfunction
 
 function! SyntaxCheckers_python_pylama_GetLocList() dict
-    let makeprg = self.makeprgBuild({
-        \ 'exe_before': (syntastic#util#isRunningWindows() ? '' : 'TERM=dumb'),
-        \ 'args_after': '-f pep8' })
+    let makeprg = self.makeprgBuild({ 'args_after': '-f pep8' })
 
     " TODO: "WARNING:pylama:..." messages are probably a logging bug
     let errorformat =
         \ '%-GWARNING:pylama:%.%#,' .
         \ '%A%f:%l:%c: %m'
 
+    let env = syntastic#util#isRunningWindows() ? {} : { 'TERM': 'dumb' }
+
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
-        \ 'errorformat': errorformat })
+        \ 'errorformat': errorformat,
+        \ 'env': env })
 
     " adjust for weirdness in each checker
     for e in loclist
@@ -54,8 +59,6 @@ function! SyntaxCheckers_python_pylama_GetLocList() dict
         endif
     endfor
 
-    call self.setWantSort(1)
-
     return loclist
 endfunction
 
@@ -68,4 +71,4 @@ call g:SyntasticRegistry.CreateAndRegisterChecker({
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:

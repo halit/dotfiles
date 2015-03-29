@@ -1,5 +1,5 @@
-" vi: fdl=1 
-let g:pymode_version = "0.7.8b"
+" vi: fdl=1
+let g:pymode_version = "0.8.1"
 
 com! PymodeVersion echomsg "Current python-mode version: " . g:pymode_version
 com! PymodeTroubleshooting call pymode#troubleshooting#test()
@@ -36,6 +36,8 @@ call pymode#default("g:pymode_indent", 1)
 
 " Enable/disable pymode folding for pyfiles.
 call pymode#default("g:pymode_folding", 1)
+" Maximum file length to check for nested class/def statements
+call pymode#default("g:pymode_folding_nest_limit", 1000)
 " Change for folding customization (by example enable fold for 'if', 'for')
 call pymode#default("g:pymode_folding_regex", '^\s*\%(class\|def\) \w\+')
 
@@ -47,6 +49,8 @@ call pymode#default("g:pymode_trim_whitespaces", 1)
 
 " Set recomended python options
 call pymode#default("g:pymode_options", 1)
+call pymode#default("g:pymode_options_max_line_length", 80)
+call pymode#default("g:pymode_options_colorcolumn", 1)
 
 " Minimal height of pymode quickfix window
 call pymode#default('g:pymode_quickfix_maxheight', 6)
@@ -127,6 +131,20 @@ call pymode#default("g:pymode_lint_error_symbol", "EE")
 call pymode#default("g:pymode_lint_info_symbol", "II")
 call pymode#default("g:pymode_lint_pyflakes_symbol", "FF")
 
+" Code checkers options
+call pymode#default("g:pymode_lint_options_pep8",
+    \ {'max_line_length': g:pymode_options_max_line_length})
+
+call pymode#default("g:pymode_lint_options_pylint",
+    \ {'max-line-length': g:pymode_options_max_line_length})
+
+call pymode#default("g:pymode_lint_options_mccabe",
+    \ {'complexity': 12})
+
+call pymode#default("g:pymode_lint_options_pep257", {})
+call pymode#default("g:pymode_lint_options_pyflakes", { 'builtins': '_' })
+
+
 " }}}
 
 " SET/UNSET BREAKPOINTS {{{
@@ -151,8 +169,14 @@ call pymode#default('g:pymode_rope', 1)
 " System plugin variable
 call pymode#default('g:pymode_rope_current', '')
 
+" Configurable rope project root
+call pymode#default('g:pymode_rope_project_root', '')
+
+" Configurable rope project folder (always relative to project root)
+call pymode#default('g:pymode_rope_ropefolder', '.ropeproject')
+
 " If project hasnt been finded in current working directory, look at parents directory
-call pymode#default('g:pymode_rope_lookup_project', 1)
+call pymode#default('g:pymode_rope_lookup_project', 0)
 
 " Enable Rope completion
 call pymode#default('g:pymode_rope_completion', 1)
@@ -240,10 +264,6 @@ if &compatible
     set nocompatible
 endif
 filetype plugin on
-
-if exists('+shellslash')
-    set shellslash
-endif
 
 " Disable python-related functionality
 " let g:pymode_python = 'disable'

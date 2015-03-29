@@ -1,4 +1,5 @@
 """ Pylama's shell support. """
+
 from __future__ import absolute_import, with_statement
 
 import sys
@@ -58,7 +59,7 @@ def check_files(paths, options, rootpath=None, error=True):
     work_paths = []
     for path in paths:
 
-        if not any(l.allow(path) for _, l in options.linters):
+        if not options.force and not any(l.allow(path) for _, l in options.linters): # noqa
             continue
 
         if not op.exists(path):
@@ -72,7 +73,7 @@ def check_files(paths, options, rootpath=None, error=True):
     errors = async_check_files(work_paths, options, rootpath=rootpath)
 
     for er in errors:
-        LOGGER.warning(pattern, er)
+        LOGGER.warning(pattern, er._info)
 
     if error:
         sys.exit(int(bool(errors)))

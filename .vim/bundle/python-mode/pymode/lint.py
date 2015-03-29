@@ -12,7 +12,6 @@ def code_check():
     :return bool:
 
     """
-
     with silence_stderr():
 
         from pylama.main import parse_options
@@ -21,11 +20,21 @@ def code_check():
         if not env.curbuf.name:
             return env.stop()
 
+        linters = env.var('g:pymode_lint_checkers')
+        env.debug(linters)
+
         options = parse_options(
+            linters=linters, force=1,
             ignore=env.var('g:pymode_lint_ignore'),
             select=env.var('g:pymode_lint_select'),
-            linters=env.var('g:pymode_lint_checkers'),
         )
+
+        for linter in linters:
+            opts = env.var('g:pymode_lint_options_%s' % linter, silence=True)
+            if opts:
+                options.linters_params[linter] = options.linters_params.get(linter, {})
+                options.linters_params[linter].update(opts)
+
         env.debug(options)
 
         path = os.path.relpath(env.curbuf.name, env.curdir)
@@ -57,6 +66,8 @@ def code_check():
         errors = sorted(errors, key=__sort)
 
     for e in errors:
-        e['bufnr'] = env.curbuf.number
+        e._info['bufnr'] = env.curbuf.number
 
-    env.run('g:PymodeLocList.current().extend', errors)
+    env.run('g:PymodeLocList.current().extend', [e._info for e in errors])
+
+# pylama:ignore=W0212,E1103

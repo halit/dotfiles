@@ -225,7 +225,7 @@ endfunction
 " similar to Haskell's Prelude.foldl1
 function! s:foldl1(f, xs) abort
   if len(a:xs) == 0
-    throw 'foldl1'
+    throw 'vital: Data.List: foldl1'
   endif
   return s:foldl(a:f, a:xs[0], a:xs[1:])
 endfunction
@@ -238,7 +238,7 @@ endfunction
 " similar to Haskell's Prelude.fold11
 function! s:foldr1(f, xs) abort
   if len(a:xs) == 0
-    throw 'foldr1'
+    throw 'vital: Data.List: foldr1'
   endif
   return s:foldr(a:f, a:xs[-1], a:xs[0:-2])
 endfunction
@@ -264,11 +264,10 @@ endfunction
 " Inspired by Ruby's with_index method.
 function! s:with_index(list, ...) abort
   let base = a:0 > 0 ? a:1 : 0
-  return s:zip(a:list, range(base, len(a:list)+base-1))
+  return map(copy(a:list), '[v:val, v:key + base]')
 endfunction
 
 " similar to Ruby's detect or Haskell's find.
-" TODO spec and doc
 function! s:find(list, default, f) abort
   for x in a:list
     if eval(substitute(a:f, 'v:val', string(x), 'g'))
@@ -330,6 +329,17 @@ endfunction
 " Return zero otherwise.
 function! s:has_common_items(list1, list2) abort
   return !empty(filter(copy(a:list1), 'index(a:list2, v:val) isnot -1'))
+endfunction
+
+function! s:intersect(list1, list2) abort
+  let items = []
+  " for funcref
+  for X in a:list1
+    if index(a:list2, X) != -1 && index(items, X) == -1
+      let items += [X]
+    endif
+  endfor
+  return items
 endfunction
 
 " similar to Ruby's group_by.

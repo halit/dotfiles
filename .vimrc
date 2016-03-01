@@ -17,11 +17,11 @@ filetype off
 map <C-c> :w !xsel -i -b<CR><CR>
 
 " Init bundle 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Plugins
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
@@ -29,19 +29,21 @@ Bundle 'klen/python-mode'
 Bundle 'Lokaltog/vim-easymotion' 
 Bundle 'kien/ctrlp.vim'
 Bundle 'fholgado/minibufexpl.vim'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'majutsushi/tagbar'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'SirVer/ultisnips'
-Bundle "honza/vim-snippets"
-Bundle 'ervandew/supertab'
-Bundle 'vim-scripts/c.vim'
-Bundle 'vim-scripts/DrawIt'
+Plugin 'scwood/vim-hybrid'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'majutsushi/tagbar'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/DrawIt'
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-filetype plugin indent on
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " Fix youcompleteme and ultisnip
 let g:ulti_expand_or_jump_res = 0

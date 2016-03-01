@@ -1,0 +1,174 @@
+!-----URxvt settings-----!
+URxvt*perl-ext-common: default,clipboard,vtwheel,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.tabbed.new-button: false
+URxvt.scrollBar: false
+URxvt.letterSpace: -1
+URxvt.font: xft:source code pro:size=12:hinting=full:antialias=true
+URxvt*altSendsEscape: true
+Xft.autohint:1
+Xft.lcdfilter:lcddefault
+Xft.antialias:1
+Xft.hinting:1
+Xft.hintstyle:hintfull
+Xft.rgba:rgb
+
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+! Nastavuje kopirovani
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-C:   perl:clipboard:copy
+
+! disable the stupid ctrl+shift 'feature'
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!-----Universal Settings-----!
+Xft*dpi:                96
+
+! Google Material Design
+
+*background 		: #263238
+*foreground 		: #eceff1
+
+! black
+*color0  			: #263238
+*color8  			: #37474f
+! red
+*color1  			: #ff9800
+*color9  			: #ffa74d
+! green
+*color2  			: #8bc34a
+*color10 			: #9ccc65
+! yellow
+*color3  			: #ffc107
+*color11 			: #ffa000
+! blue
+*color4  			: #03a9f4
+*color12 			: #81d4fa
+! magenta
+*color5  			: #e91e63
+*color13 			: #ad1457
+! cyan
+*color6  			: #009688
+*color14 			: #26a69a
+! white
+*color7  			: #cfd8dc
+*color15 			: #eceff1
+
+! Google Material Design
+
+!*background       : #263238
+!*foreground       : #eceff1
+!!*color0: #494949
+!!*color8: #484848
+!!!red
+!!*color1: #B9716E
+!!*color9: #8F5A58
+!!!green
+!!*color2:  #588F7A
+!!*color10: #326F58
+!!!yellow
+!!*color3:  #AAA857
+!!*color11: #C7C575
+!!!blue
+!!*color4:  #A0C3C0
+!!*color12: #507F7C
+!!!magenta
+!!*color5:  #735E74
+!!*color13: #A387A6
+!!!cyan
+!!*color6:  #695935
+!!*color14: #927C4B
+!!!white
+!!*color7:  #B1B1B1
+!!*color15: #C7C7C7
+
+
+!! black
+!*color0           : #263238
+!*color8           : #37474f
+!! red
+!*color1           : #ff9800
+!*color9           : #ffa74d
+!! green
+!*color2           : #8bc34a
+!*color10          : #9ccc65
+!! yellow
+!*color3           : #ffc107
+!*color11          : #ffa000
+!! blue
+!*color4           : #03a9f4
+!*color12          : #81d4fa
+!! magenta
+!*color5           : #e91e63
+!*color13          : #ad1457
+!!! cyan
+!*color6           : #009688
+!*color14          : #26a69a
+!!! white
+!*color7           : #cfd8dc
+!*color15          : #eceff1
+
+!!Rooster - SOS
+!urxvt*background:  #373b43
+!urxvt*foreground:  #78796f
+!!black
+!urxvt*color0:      #373b43
+!urxvt*color8:      #373b43
+!!red
+!urxvt*color1:      #fdcd39
+!urxvt*color9:      #fdcd39
+!!green
+!urxvt*color2:      #fbfd59
+!urxvt*color10:     #fbfd59
+!!yellow
+!urxvt*color3:      #deac40
+!urxvt*color11:     #deac40
+!!blue
+!urxvt*color4:      #afb171
+!urxvt*color12:     #afb171
+!!magenta
+!urxvt*color5:      #b387e7
+!urxvt*color13:     #b387e7
+!!cyan
+!urxvt*color6:      #63e860
+!urxvt*color14:     #63e860
+!!white
+!urxvt*color7:      #efdecb
+!urxvt*color15:     #efdecb
+
+
+!*.foreground      : #d0d0d0
+!*.background      : #000000
+!*.cursorColor     : #ffffff
+
+!!black
+!*color0:#010008
+!*color8:#1C1C1C
+!!red
+!*color1:#A71B1A
+!*color9:#BF3130
+!!green
+!*color2:#3B8526
+!*color10:#58A642
+!!yellow
+!*color3:#E49202
+!*color11:#FFB026
+!!blue
+!*color4:#1D576D
+!*color12:#31788E
+!!magenta
+!*color5:#97219C
+!*color13:#A7248C
+!!cyan
+!*color6:#24866F
+!*color14:#37A48D
+!!white
+!*color7:#B5AD64
+!*color15:#CEC67D
+

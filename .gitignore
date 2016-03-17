@@ -109,7 +109,6 @@ Makefile*
 
 *.gem
 *.rbc
-/.config
 /coverage/
 /InstalledFiles
 /pkg/
